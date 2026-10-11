@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { CheckCircle2, Clock, Moon, Sun, Scale, HelpCircle } from 'lucide-react';
+import { CheckCircle2, Clock, Moon, Sun, Scale } from 'lucide-react';
 import {
   computeAttendanceDate,
   computeLateMinutes,
   computeOvertimeMinutes,
-  computeWorkHours,
-  computeHalfDay,
-  roundHalfUp,
-  truncateToSeconds
+  roundHalfUp
 } from '../utils/rulesEngine';
 
 export const RulesLab: React.FC = () => {
@@ -49,13 +46,14 @@ export const RulesLab: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Intro Header */}
       <div className="glass-panel hud-corner rounded-xl p-5 shadow-xl">
         <h2 className="text-base font-bold text-white tracking-tight flex items-center gap-2 mb-1 tech-gradient-text">
           <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-          Business Rules Validation Laboratory (R1 – R10)
+          Business Rules Validation Laboratory (Rules R1 – R10)
         </h2>
-        <p className="text-xs text-slate-300">
-          Interactive validator demonstrating edge cases, boundary conditions, and algorithmic decisions.
+        <p className="text-xs text-slate-300 leading-relaxed">
+          Interactive verification bench demonstrating edge cases, boundary thresholds, and algorithmic decisions.
         </p>
       </div>
 
@@ -67,216 +65,216 @@ export const RulesLab: React.FC = () => {
               <Moon className="w-4 h-4 text-cyan-400" />
               <h3 className="font-semibold text-xs text-cyan-300 uppercase tracking-wider font-mono">Rule R1: Overnight Shift Date</h3>
             </div>
-            <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/80 shadow-[0_0_10px_rgba(6,182,212,0.2)]">
-              IST (UTC+05:30)
+            <span className="cyber-badge cyber-badge-cyan">
+              Timezone: IST (UTC+05:30)
             </span>
           </div>
 
-          <p className="text-xs text-slate-400">
-            When <code className="text-indigo-300 font-mono">shift_end &lt;= shift_start</code>, a punch-in prior to shift_end belongs to the previous calendar day.
+          <p className="text-xs text-slate-300 leading-relaxed">
+            When <code className="text-cyan-300 font-mono">shift_end &lt;= shift_start</code>, any punch-in occurring prior to shift_end belongs to the previous calendar day.
           </p>
 
           <div className="grid grid-cols-2 gap-3 text-xs font-mono">
             <div>
-              <label className="text-slate-400 block mb-1">Shift Start</label>
+              <label className="text-slate-300 block mb-1 font-medium">Shift Start</label>
               <input
                 type="text"
                 value={r1ShiftStart}
                 onChange={e => setR1ShiftStart(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded p-2 text-slate-200"
+                className="cyber-input w-full rounded-lg p-2"
               />
             </div>
             <div>
-              <label className="text-slate-400 block mb-1">Shift End</label>
+              <label className="text-slate-300 block mb-1 font-medium">Shift End</label>
               <input
                 type="text"
                 value={r1ShiftEnd}
                 onChange={e => setR1ShiftEnd(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded p-2 text-slate-200"
+                className="cyber-input w-full rounded-lg p-2"
               />
             </div>
             <div>
-              <label className="text-slate-400 block mb-1">Punch IST Date</label>
+              <label className="text-slate-300 block mb-1 font-medium">Punch IST Date</label>
               <input
                 type="date"
                 value={r1PunchDate}
                 onChange={e => setR1PunchDate(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded p-2 text-slate-200"
+                className="cyber-input w-full rounded-lg p-2"
               />
             </div>
             <div>
-              <label className="text-slate-400 block mb-1">Punch IST Time</label>
+              <label className="text-slate-300 block mb-1 font-medium">Punch IST Time</label>
               <input
                 type="text"
                 value={r1PunchTime}
                 onChange={e => setR1PunchTime(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded p-2 text-slate-200"
+                className="cyber-input w-full rounded-lg p-2"
               />
             </div>
           </div>
 
-          <div className="p-3 bg-slate-950/80 rounded-lg border border-indigo-900/50 flex items-center justify-between font-mono text-xs">
-            <span className="text-slate-400">Computed Attendance Date:</span>
+          <div className="p-3 bg-slate-950/80 rounded-lg border border-cyan-500/20 flex items-center justify-between font-mono text-xs shadow-inner">
+            <span className="text-slate-400">Assigned Attendance Date:</span>
             <span className="text-sm font-bold text-emerald-400">{r1ResultDate}</span>
           </div>
         </div>
 
         {/* Rule R2: Grace Period & Late Minutes */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="glass-panel hud-corner rounded-xl p-5 shadow-xl space-y-4">
+          <div className="flex items-center justify-between border-b border-cyan-500/10 pb-3">
             <div className="flex items-center gap-2">
               <Clock className="w-4 h-4 text-amber-400" />
-              <h3 className="font-semibold text-sm text-slate-200">Rule R2: 10-Min Grace Period</h3>
+              <h3 className="font-semibold text-xs text-amber-300 uppercase tracking-wider font-mono">Rule R2: 10-Minute Grace Period</h3>
             </div>
-            <span className="text-[11px] font-mono text-amber-300 bg-amber-950/60 px-2 py-0.5 rounded border border-amber-800">
-              Strictly &gt; 10:00
+            <span className="cyber-badge cyber-badge-amber">
+              Condition: Strictly &gt; 10:00
             </span>
           </div>
 
-          <p className="text-xs text-slate-400">
-            Late ONLY if strictly &gt; 10:00 after shift_start. When late, measured from shift_start, not grace end!
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Employee is marked late ONLY when arrival is strictly &gt; 10 minutes past shift start. When late, duration is measured from shift start.
           </p>
 
           <div className="grid grid-cols-2 gap-3 text-xs font-mono">
             <div>
-              <label className="text-slate-400 block mb-1">Shift Start</label>
+              <label className="text-slate-300 block mb-1 font-medium">Shift Start</label>
               <input
                 type="text"
                 value={r2ShiftStart}
                 onChange={e => setR2ShiftStart(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded p-2 text-slate-200"
+                className="cyber-input w-full rounded-lg p-2"
               />
             </div>
             <div>
-              <label className="text-slate-400 block mb-1">Punch In Time (HH:MM:SS)</label>
+              <label className="text-slate-300 block mb-1 font-medium">Punch In Time (HH:MM:SS)</label>
               <input
                 type="text"
                 value={r2PunchTime}
                 onChange={e => setR2PunchTime(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded p-2 text-slate-200"
+                className="cyber-input w-full rounded-lg p-2"
               />
             </div>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setR2PunchTime('09:40:00')}
-              className="px-2 py-1 bg-slate-800 text-[11px] font-mono rounded hover:bg-slate-700 text-slate-300"
+              className="px-2.5 py-1 bg-slate-900 border border-slate-700 text-[11px] font-mono rounded hover:bg-slate-800 text-slate-200 transition-colors"
             >
-              Test 09:40:00 (On Grace)
+              Test 09:40:00 (Within Grace: 0m)
             </button>
             <button
               onClick={() => setR2PunchTime('09:40:01')}
-              className="px-2 py-1 bg-slate-800 text-[11px] font-mono rounded hover:bg-slate-700 text-slate-300"
+              className="px-2.5 py-1 bg-slate-900 border border-slate-700 text-[11px] font-mono rounded hover:bg-slate-800 text-slate-200 transition-colors"
             >
-              Test 09:40:01 (1s Late)
+              Test 09:40:01 (1s Over: 10m)
             </button>
             <button
               onClick={() => setR2PunchTime('10:15:59')}
-              className="px-2 py-1 bg-slate-800 text-[11px] font-mono rounded hover:bg-slate-700 text-slate-300"
+              className="px-2.5 py-1 bg-slate-900 border border-slate-700 text-[11px] font-mono rounded hover:bg-slate-800 text-slate-200 transition-colors"
             >
               Test 10:15:59 (45m)
             </button>
           </div>
 
-          <div className="p-3 bg-slate-950/80 rounded-lg border border-amber-900/50 flex items-center justify-between font-mono text-xs">
-            <span className="text-slate-400">Computed late_minutes:</span>
+          <div className="p-3 bg-slate-950/80 rounded-lg border border-amber-500/20 flex items-center justify-between font-mono text-xs shadow-inner">
+            <span className="text-slate-400">Calculated Late Duration:</span>
             <span className="text-sm font-bold text-amber-400">{r2LateMin} minutes</span>
           </div>
         </div>
 
         {/* Rule R3: Overtime >= 30 Minutes */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="glass-panel hud-corner rounded-xl p-5 shadow-xl space-y-4">
+          <div className="flex items-center justify-between border-b border-cyan-500/10 pb-3">
             <div className="flex items-center gap-2">
               <Sun className="w-4 h-4 text-emerald-400" />
-              <h3 className="font-semibold text-sm text-slate-200">Rule R3: Overtime Minimum</h3>
+              <h3 className="font-semibold text-xs text-emerald-300 uppercase tracking-wider font-mono">Rule R3: Overtime Threshold</h3>
             </div>
-            <span className="text-[11px] font-mono text-emerald-300 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800">
-              Threshold &gt;= 30m
+            <span className="cyber-badge cyber-badge-emerald">
+              Minimum Threshold: &gt;= 30m
             </span>
           </div>
 
-          <p className="text-xs text-slate-400">
-            Whole minutes elapsed past shift_end, counted only when &gt;= 30 minutes; otherwise 0.
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Whole minutes elapsed past shift end, credited only when duration &gt;= 30 minutes; otherwise recorded as 0.
           </p>
 
           <div className="grid grid-cols-2 gap-3 text-xs font-mono">
             <div>
-              <label className="text-slate-400 block mb-1">Shift End</label>
+              <label className="text-slate-300 block mb-1 font-medium">Shift End</label>
               <input
                 type="text"
                 value={r3ShiftEnd}
                 onChange={e => setR3ShiftEnd(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded p-2 text-slate-200"
+                className="cyber-input w-full rounded-lg p-2"
               />
             </div>
             <div>
-              <label className="text-slate-400 block mb-1">Punch Out Time</label>
+              <label className="text-slate-300 block mb-1 font-medium">Punch Out Time</label>
               <input
                 type="text"
                 value={r3PunchOut}
                 onChange={e => setR3PunchOut(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded p-2 text-slate-200"
+                className="cyber-input w-full rounded-lg p-2"
               />
             </div>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setR3PunchOut('18:35:00')}
-              className="px-2 py-1 bg-slate-800 text-[11px] font-mono rounded hover:bg-slate-700 text-slate-300"
+              className="px-2.5 py-1 bg-slate-900 border border-slate-700 text-[11px] font-mono rounded hover:bg-slate-800 text-slate-200 transition-colors"
             >
-              Test 18:35 (5 min &lt; 30)
+              Test 18:35 (5 min &lt; 30 threshold)
             </button>
             <button
               onClick={() => setR3PunchOut('19:10:00')}
-              className="px-2 py-1 bg-slate-800 text-[11px] font-mono rounded hover:bg-slate-700 text-slate-300"
+              className="px-2.5 py-1 bg-slate-900 border border-slate-700 text-[11px] font-mono rounded hover:bg-slate-800 text-slate-200 transition-colors"
             >
-              Test 19:10 (40 min &gt;= 30)
+              Test 19:10 (40 min &gt;= 30 threshold)
             </button>
           </div>
 
-          <div className="p-3 bg-slate-950/80 rounded-lg border border-emerald-900/50 flex items-center justify-between font-mono text-xs">
-            <span className="text-slate-400">Computed overtime_minutes:</span>
+          <div className="p-3 bg-slate-950/80 rounded-lg border border-emerald-500/20 flex items-center justify-between font-mono text-xs shadow-inner">
+            <span className="text-slate-400">Calculated Overtime:</span>
             <span className="text-sm font-bold text-emerald-400">{r3OtMin} minutes</span>
           </div>
         </div>
 
         {/* Rule R4 & R8: Half-Up Rounding vs Banker's Rounding */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="glass-panel hud-corner rounded-xl p-5 shadow-xl space-y-4">
+          <div className="flex items-center justify-between border-b border-cyan-500/10 pb-3">
             <div className="flex items-center gap-2">
               <Scale className="w-4 h-4 text-purple-400" />
-              <h3 className="font-semibold text-sm text-slate-200">Rule R4 & R8: Half-Up Rounding</h3>
+              <h3 className="font-semibold text-xs text-purple-300 uppercase tracking-wider font-mono">Rules R4 &amp; R8: Half-Up Rounding</h3>
             </div>
-            <span className="text-[11px] font-mono text-purple-300 bg-purple-950/60 px-2 py-0.5 rounded border border-purple-800">
-              ROUND_HALF_UP
+            <span className="cyber-badge cyber-badge-indigo">
+              Rounding: ROUND_HALF_UP
             </span>
           </div>
 
-          <p className="text-xs text-slate-400">
-            Python's built-in <code className="text-rose-400 font-mono">round()</code> uses round-half-to-even (banker's rounding), which fails R4! Decimal with ROUND_HALF_UP is required.
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Python built-in <code className="text-rose-400 font-mono">round()</code> applies round-half-to-even (banker's rounding), failing Rule R4! Decimal with ROUND_HALF_UP guarantees accuracy.
           </p>
 
-          <div className="space-y-2 text-xs font-mono">
-            <label className="text-slate-400 block">Duration in Seconds (e.g. 30330s = 8.425 hours)</label>
+          <div className="space-y-1.5 text-xs font-mono">
+            <label className="text-slate-300 block font-medium">Duration in Seconds (e.g. 30330s = 8.425 hours)</label>
             <input
               type="number"
               value={r4DurationSec}
               onChange={e => setR4DurationSec(Number(e.target.value))}
-              className="w-full bg-slate-950 border border-slate-800 rounded p-2 text-slate-200"
+              className="cyber-input w-full rounded-lg p-2"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-            <div className="p-3 bg-rose-950/40 rounded-lg border border-rose-900/50">
-              <div className="text-[11px] text-rose-300">Banker's round() [Trap]</div>
-              <div className="text-sm font-bold text-rose-400 mt-1">{standardRound}</div>
+            <div className="p-3 bg-rose-950/40 rounded-lg border border-rose-500/30">
+              <div className="text-[11px] text-rose-300 font-medium">Banker's round() [Trap]</div>
+              <div className="text-base font-bold text-rose-400 mt-1">{standardRound}</div>
             </div>
-            <div className="p-3 bg-emerald-950/40 rounded-lg border border-emerald-900/50">
-              <div className="text-[11px] text-emerald-300">Half-Up [Correct R4]</div>
-              <div className="text-sm font-bold text-emerald-400 mt-1">{halfUpRound}</div>
+            <div className="p-3 bg-emerald-950/40 rounded-lg border border-emerald-500/30">
+              <div className="text-[11px] text-emerald-300 font-medium">Half-Up [Compliant Rule R4]</div>
+              <div className="text-base font-bold text-emerald-400 mt-1">{halfUpRound}</div>
             </div>
           </div>
         </div>

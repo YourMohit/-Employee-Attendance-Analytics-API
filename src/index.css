@@ -2,73 +2,83 @@
 
 @layer base {
   :root {
-    --cyber-cyan: #06b6d4;
+    --cyber-cyan: #00f0ff;
     --cyber-emerald: #10b981;
     --cyber-violet: #8b5cf6;
-    --cyber-blue: #3b82f6;
-    --cyber-dark: #030712;
+    --cyber-indigo: #6366f1;
+    --cyber-dark: #050811;
+    --cyber-surface: #0a0f1d;
+    --cyber-surface-elevated: #111827;
+  }
+
+  * {
+    border-color: rgba(255, 255, 255, 0.08);
   }
 
   body {
-    background-color: #030712;
+    background-color: #050811;
     color: #f1f5f9;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.01em;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   code, pre, .font-mono {
     font-family: 'JetBrains Mono', monospace;
+    letter-spacing: -0.02em;
   }
 
-  /* Custom Futuristic Scrollbar */
+  /* Sleek Futuristic Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background: rgba(3, 7, 18, 0.8);
+    background: rgba(5, 8, 17, 0.95);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(30, 41, 59, 0.9);
+    background: rgba(30, 41, 59, 0.85);
     border-radius: 9999px;
-    border: 1px solid rgba(6, 182, 212, 0.2);
+    border: 1px solid rgba(0, 240, 255, 0.2);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(6, 182, 212, 0.5);
-    box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+    background: rgba(0, 240, 255, 0.45);
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
   }
 }
 
-/* Futuristic Cyber Grid Background */
+/* Futuristic Cyber Grid & Matrix Ambient Background */
 .cyber-bg {
-  background-color: #030712;
+  background-color: #050811;
   background-image: 
-    radial-gradient(ellipse at 50% 0%, rgba(14, 165, 233, 0.15) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 40%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 20% 70%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+    radial-gradient(ellipse at 50% -10%, rgba(0, 240, 255, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 30%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 15% 75%, rgba(16, 185, 129, 0.07) 0%, transparent 50%),
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px;
 }
 
-/* Glassmorphism Futuristic Cards */
+/* Glassmorphism Futuristic Panels */
 .glass-panel {
-  background: rgba(11, 15, 25, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  background: rgba(10, 15, 29, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 10px 36px 0 rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .glass-panel-glow {
-  background: rgba(11, 15, 25, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(6, 182, 212, 0.25);
-  box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.15), inset 0 0 15px rgba(6, 182, 212, 0.03);
+  background: rgba(10, 15, 29, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 240, 255, 0.28);
+  box-shadow: 0 0 30px -5px rgba(0, 240, 255, 0.18), inset 0 0 15px rgba(0, 240, 255, 0.04);
 }
 
 /* HUD Tech Corner Accents */
@@ -81,11 +91,13 @@
   position: absolute;
   top: -1px;
   left: -1px;
-  width: 8px;
-  height: 8px;
-  border-top: 2px solid #06b6d4;
-  border-left: 2px solid #06b6d4;
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid #00f0ff;
+  border-left: 2px solid #00f0ff;
   pointer-events: none;
+  z-index: 2;
+  transition: all 0.2s ease-in-out;
 }
 
 .hud-corner::after {
@@ -93,45 +105,63 @@
   position: absolute;
   bottom: -1px;
   right: -1px;
-  width: 8px;
-  height: 8px;
-  border-bottom: 2px solid #06b6d4;
-  border-right: 2px solid #06b6d4;
+  width: 9px;
+  height: 9px;
+  border-bottom: 2px solid #00f0ff;
+  border-right: 2px solid #00f0ff;
   pointer-events: none;
+  z-index: 2;
+  transition: all 0.2s ease-in-out;
+}
+
+.hud-corner:hover::before {
+  width: 14px;
+  height: 14px;
+  box-shadow: -2px -2px 8px rgba(0, 240, 255, 0.6);
+}
+
+.hud-corner:hover::after {
+  width: 14px;
+  height: 14px;
+  box-shadow: 2px 2px 8px rgba(0, 240, 255, 0.6);
 }
 
 /* Futuristic Neon Glows */
 .glow-cyan {
-  box-shadow: 0 0 20px -3px rgba(6, 182, 212, 0.4);
+  box-shadow: 0 0 24px -2px rgba(0, 240, 255, 0.35);
 }
 
 .glow-emerald {
-  box-shadow: 0 0 20px -3px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 24px -2px rgba(16, 185, 129, 0.35);
 }
 
 .glow-indigo {
-  box-shadow: 0 0 20px -3px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 0 24px -2px rgba(99, 102, 241, 0.35);
 }
 
-/* Subtle Pulsing Beacon */
+.glow-amber {
+  box-shadow: 0 0 24px -2px rgba(245, 158, 11, 0.35);
+}
+
+/* Futuristic Beacon Pulse */
 @keyframes beacon-pulse {
   0%, 100% {
     opacity: 1;
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.6);
+    box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.7);
   }
   50% {
-    opacity: 0.7;
-    transform: scale(1.05);
-    box-shadow: 0 0 12px 4px rgba(6, 182, 212, 0.4);
+    opacity: 0.75;
+    transform: scale(1.06);
+    box-shadow: 0 0 14px 4px rgba(0, 240, 255, 0.45);
   }
 }
 
 .animate-beacon {
-  animation: beacon-pulse 2.5s infinite ease-in-out;
+  animation: beacon-pulse 2.2s infinite ease-in-out;
 }
 
-/* Subtle Shimmer for High-Tech Headers */
+/* Futuristic Shimmer for High-Tech Typography */
 @keyframes tech-shimmer {
   0% {
     background-position: -200% 0;
@@ -142,17 +172,92 @@
 }
 
 .tech-gradient-text {
-  background: linear-gradient(90deg, #ffffff 0%, #38bdf8 35%, #a855f7 70%, #ffffff 100%);
+  background: linear-gradient(90deg, #ffffff 0%, #38bdf8 30%, #a855f7 65%, #00f0ff 85%, #ffffff 100%);
   background-size: 200% auto;
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: tech-shimmer 8s linear infinite;
+  animation: tech-shimmer 7s linear infinite;
 }
 
-/* Tech Badges */
+/* Cyber Chips and Indicators */
 .telemetry-chip {
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.cyber-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  border-radius: 0.375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.cyber-badge-cyan {
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: #67e8f9;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
+}
+
+.cyber-badge-emerald {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #6ee7b7;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
+}
+
+.cyber-badge-indigo {
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  color: #a5b4fc;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.1);
+}
+
+.cyber-badge-amber {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fcd34d;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.1);
+}
+
+/* Futuristic Code & Input Styling */
+.cyber-input {
+  background-color: rgba(5, 8, 17, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f1f5f9;
+  transition: all 0.2s ease;
+}
+
+.cyber-input:focus {
+  outline: none;
+  border-color: #00f0ff;
+  box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.25), 0 0 16px rgba(0, 240, 255, 0.2);
+}
+
+/* Futuristic Button Styling */
+.cyber-btn-primary {
+  background: linear-gradient(135deg, #0284c7 0%, #06b6d4 50%, #00f0ff 100%);
+  color: #030712;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.35);
+}
+
+.cyber-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px rgba(0, 240, 255, 0.6);
+  filter: brightness(1.08);
+}
+
+.cyber-btn-primary:active {
+  transform: translateY(0);
 }
