@@ -1,0 +1,8 @@
+{
+  "name": "Employee Attendance & Analytics API Studio",
+  "description": "Enterprise-grade Attendance & Workforce Analytics API and Pipeline Explorer with FastAPI, MongoDB aggregation pipelines, and interactive testbench.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
