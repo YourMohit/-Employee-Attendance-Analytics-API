@@ -25,7 +25,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-indigo-600 selection:text-white">
+    <div className="min-h-screen cyber-bg text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-black relative">
       {/* Top Navbar */}
       <Navbar
         activeTab={activeTab}
@@ -33,26 +33,34 @@ export default function App() {
         onResetData={handleResetData}
       />
 
-      {/* Hero Notification Banner */}
-      <div className="bg-gradient-to-r from-indigo-950/60 via-slate-900 to-emerald-950/60 border-b border-slate-800/80 px-4 py-2.5">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400" />
-            <span className="text-slate-300 font-medium">
-              Turnkey Assignment Solution: <strong className="text-white font-mono">app/main.py</strong> (FastAPI), <strong className="text-white font-mono">DECISIONS.md</strong>, <strong className="text-white font-mono">REVIEW.md</strong>, and seed data are fully implemented and verified.
-            </span>
+      {/* Futuristic Telemetry & Status HUD Strip */}
+      <div className="bg-slate-950/80 backdrop-blur-md border-b border-cyan-500/20 px-4 py-2 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-indigo-500/5 to-emerald-500/5 pointer-events-none" />
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs relative z-10">
+          <div className="flex items-center gap-3">
+            <span className="flex h-2.5 w-2.5 rounded-full bg-cyan-400 animate-beacon" />
+            <div className="flex items-center gap-2">
+              <span className="text-slate-300 font-medium">
+                HROne Core Engine: <span className="text-cyan-300 font-mono font-semibold">app/main.py</span> (FastAPI + MongoDB 7.0)
+              </span>
+              <span className="hidden sm:inline px-2 py-0.5 text-[10px] font-mono rounded bg-cyan-950/80 text-cyan-400 border border-cyan-800/80">
+                R1–R10 ENFORCED
+              </span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-4 text-slate-400 font-mono text-[11px]">
-            <span>Uvicorn 8000</span>
-            <span>•</span>
-            <span>MongoDB 7.0 (IXSCAN Guaranteed)</span>
-            <span>•</span>
+          <div className="flex items-center gap-3 text-slate-400 font-mono text-[11px]">
+            <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">
+              SYS: <span className="text-emerald-400 font-bold">ONLINE</span>
+            </span>
+            <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300 hidden md:inline">
+              PLAN: <span className="text-cyan-400 font-bold">IXSCAN GUARANTEED</span>
+            </span>
             <button
               onClick={() => setActiveTab('code')}
-              className="text-indigo-400 hover:text-indigo-300 flex items-center gap-1 transition-colors"
+              className="text-cyan-400 hover:text-cyan-300 flex items-center gap-1 transition-colors px-2 py-0.5 rounded hover:bg-cyan-950/50"
             >
-              <span>Inspect Files</span>
+              <span>Submission Code</span>
               <ArrowUpRight className="w-3 h-3" />
             </button>
           </div>

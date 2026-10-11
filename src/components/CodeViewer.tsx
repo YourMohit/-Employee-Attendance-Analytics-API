@@ -18,10 +18,11 @@ export const CodeViewer: React.FC = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
       {/* File List Sidebar (3 cols) */}
-      <div className="lg:col-span-3 space-y-3">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-3 shadow-sm space-y-1">
-          <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-2 py-1 font-mono">
-            Submission Files
+      <div className="lg:col-span-3 space-y-4">
+        <div className="glass-panel hud-corner rounded-xl p-3 shadow-xl space-y-1">
+          <div className="text-xs font-semibold text-cyan-400 uppercase tracking-wider px-2 py-1 font-mono flex items-center gap-1.5 border-b border-cyan-500/10 pb-2 mb-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            Repository Files
           </div>
           {REPO_FILES.map(file => {
             const isSelected = file.path === selectedFile.path;
@@ -31,14 +32,14 @@ export const CodeViewer: React.FC = () => {
                 onClick={() => setSelectedFile(file)}
                 className={`w-full text-left px-3 py-2 rounded-lg text-xs font-mono transition-all flex items-center gap-2 ${
                   isSelected
-                    ? 'bg-indigo-600 text-white font-semibold shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                    ? 'bg-cyan-950/90 text-cyan-300 border border-cyan-500/50 font-semibold shadow-[0_0_12px_rgba(6,182,212,0.25)]'
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/60'
                 }`}
               >
                 {file.name.endsWith('.md') ? (
-                  <FileText className="w-3.5 h-3.5 shrink-0" />
+                  <FileText className="w-3.5 h-3.5 shrink-0 text-cyan-400" />
                 ) : (
-                  <FileCode className="w-3.5 h-3.5 shrink-0" />
+                  <FileCode className="w-3.5 h-3.5 shrink-0 text-emerald-400" />
                 )}
                 <span className="truncate">{file.name}</span>
               </button>
@@ -88,13 +89,13 @@ git push -u origin main`}
       </div>
 
       {/* Code Display Area (9 cols) */}
-      <div className="lg:col-span-9 bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-sm flex flex-col">
+      <div className="lg:col-span-9 glass-panel hud-corner rounded-xl overflow-hidden shadow-xl flex flex-col">
         {/* File Header */}
-        <div className="p-4 bg-slate-950/80 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3">
+        <div className="p-4 bg-slate-950/80 border-b border-cyan-500/10 flex flex-wrap items-center justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-sm font-semibold text-white">{selectedFile.path}</span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400 uppercase">
+              <span className="font-mono text-sm font-semibold text-cyan-200">{selectedFile.path}</span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/80 border border-cyan-800/80 text-cyan-300 uppercase">
                 {selectedFile.language}
               </span>
             </div>
@@ -109,7 +110,7 @@ git push -u origin main`}
                 placeholder="Find in file..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="bg-slate-900 border border-slate-800 rounded-lg pl-8 pr-3 py-1 text-xs text-slate-200 font-mono focus:border-indigo-500 focus:outline-none w-40 sm:w-52"
+                className="bg-slate-950/90 border border-slate-800 rounded-lg pl-8 pr-3 py-1 text-xs text-cyan-200 font-mono focus:border-cyan-500 focus:outline-none w-40 sm:w-52"
               />
             </div>
 

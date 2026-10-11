@@ -49,25 +49,25 @@ export const RulesLab: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
-        <h2 className="text-base font-bold text-white tracking-tight flex items-center gap-2 mb-1">
+      <div className="glass-panel hud-corner rounded-xl p-5 shadow-xl">
+        <h2 className="text-base font-bold text-white tracking-tight flex items-center gap-2 mb-1 tech-gradient-text">
           <CheckCircle2 className="w-5 h-5 text-emerald-400" />
           Business Rules Validation Laboratory (R1 – R10)
         </h2>
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-slate-300">
           Interactive validator demonstrating edge cases, boundary conditions, and algorithmic decisions.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Rule R1: Overnight Shifts */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="glass-panel hud-corner rounded-xl p-5 shadow-xl space-y-4">
+          <div className="flex items-center justify-between border-b border-cyan-500/10 pb-3">
             <div className="flex items-center gap-2">
-              <Moon className="w-4 h-4 text-indigo-400" />
-              <h3 className="font-semibold text-sm text-slate-200">Rule R1: Overnight Shift Date</h3>
+              <Moon className="w-4 h-4 text-cyan-400" />
+              <h3 className="font-semibold text-xs text-cyan-300 uppercase tracking-wider font-mono">Rule R1: Overnight Shift Date</h3>
             </div>
-            <span className="text-[11px] font-mono text-indigo-300 bg-indigo-950/60 px-2 py-0.5 rounded border border-indigo-800">
+            <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/80 shadow-[0_0_10px_rgba(6,182,212,0.2)]">
               IST (UTC+05:30)
             </span>
           </div>

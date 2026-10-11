@@ -616,10 +616,15 @@ export const ApiConsole: React.FC<ApiConsoleProps> = ({ employees, setEmployees,
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
       {/* Left Column: Endpoints List */}
       <div className="lg:col-span-4 space-y-4">
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="font-semibold text-sm text-slate-200">API Endpoints (OpenAPI Contract)</h3>
-            <span className="text-xs font-mono text-slate-500">{ENDPOINTS.length} operations</span>
+        <div className="glass-panel hud-corner rounded-xl p-4 shadow-xl">
+          <div className="flex items-center justify-between mb-3 border-b border-cyan-500/10 pb-2">
+            <h3 className="font-semibold text-xs text-cyan-300 uppercase tracking-wider font-mono flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+              API Endpoints
+            </h3>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/80 text-cyan-400 border border-cyan-800/80">
+              {ENDPOINTS.length} OPS
+            </span>
           </div>
 
           <div className="space-y-1.5 max-h-[640px] overflow-y-auto pr-1">
@@ -638,8 +643,8 @@ export const ApiConsole: React.FC<ApiConsoleProps> = ({ employees, setEmployees,
                   onClick={() => handleSelectEndpoint(ep)}
                   className={`w-full text-left p-2.5 rounded-lg border transition-all flex items-start gap-2.5 ${
                     isSelected
-                      ? 'bg-indigo-950/40 border-indigo-700/80 shadow-sm'
-                      : 'bg-slate-950/40 border-slate-800/80 hover:bg-slate-800/50 hover:border-slate-700'
+                      ? 'bg-cyan-950/40 border-cyan-500/60 shadow-[0_0_15px_rgba(6,182,212,0.15)] ring-1 ring-cyan-500/30'
+                      : 'bg-slate-950/50 border-slate-800/80 hover:bg-slate-900/60 hover:border-slate-700'
                   }`}
                 >
                   <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded border uppercase shrink-0 ${methodColor}`}>
@@ -656,22 +661,25 @@ export const ApiConsole: React.FC<ApiConsoleProps> = ({ employees, setEmployees,
         </div>
 
         {/* Database Quick Stats */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 text-xs space-y-2">
-          <div className="flex items-center gap-2 text-slate-300 font-semibold mb-1">
-            <Database className="w-4 h-4 text-indigo-400" />
-            <span>MongoDB Collections</span>
+        <div className="glass-panel hud-corner rounded-xl p-4 text-xs space-y-2">
+          <div className="flex items-center gap-2 text-cyan-300 font-semibold mb-1">
+            <Database className="w-4 h-4 text-cyan-400" />
+            <span className="font-mono text-xs uppercase tracking-wider">MongoDB Telemetry</span>
           </div>
           <div className="flex justify-between items-center py-1 border-b border-slate-800/60 font-mono">
-            <span className="text-slate-400">employees</span>
-            <span className="text-slate-200 font-semibold">{employees.length} documents</span>
+            <span className="text-slate-400">collection.employees</span>
+            <span className="text-cyan-300 font-semibold">{employees.length} docs</span>
           </div>
           <div className="flex justify-between items-center py-1 border-b border-slate-800/60 font-mono">
-            <span className="text-slate-400">attendance_logs</span>
-            <span className="text-slate-200 font-semibold">{logs.length} documents</span>
+            <span className="text-slate-400">collection.attendance_logs</span>
+            <span className="text-cyan-300 font-semibold">{logs.length} docs</span>
           </div>
           <div className="flex justify-between items-center py-1 font-mono">
-            <span className="text-slate-400">Indexes Created</span>
-            <span className="text-emerald-400 font-semibold">7 active (idempotent)</span>
+            <span className="text-slate-400">B-Tree Indexes</span>
+            <span className="text-emerald-400 font-semibold flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              7 active (IXSCAN)
+            </span>
           </div>
         </div>
       </div>
@@ -679,40 +687,41 @@ export const ApiConsole: React.FC<ApiConsoleProps> = ({ employees, setEmployees,
       {/* Right Column: Interactive Request & Response Console */}
       <div className="lg:col-span-8 space-y-6">
         {/* Request Panel */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-sm">
+        <div className="glass-panel hud-corner rounded-xl overflow-hidden shadow-xl">
           {/* Header Bar */}
-          <div className="p-4 border-b border-slate-800 bg-slate-950/50 flex flex-wrap items-center justify-between gap-3">
+          <div className="p-4 border-b border-cyan-500/10 bg-slate-950/70 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <span
-                className={`text-xs font-mono font-bold px-2 py-0.5 rounded border uppercase ${
+                className={`text-xs font-mono font-bold px-2.5 py-1 rounded border uppercase tracking-wider ${
                   selectedEndpoint.method === 'GET'
-                    ? 'bg-blue-950 text-blue-400 border-blue-800'
+                    ? 'bg-blue-950/80 text-blue-300 border-blue-500/40 shadow-[0_0_10px_rgba(59,130,246,0.2)]'
                     : selectedEndpoint.method === 'POST'
-                    ? 'bg-emerald-950 text-emerald-400 border-emerald-800'
-                    : 'bg-amber-950 text-amber-400 border-amber-800'
+                    ? 'bg-emerald-950/80 text-emerald-300 border-emerald-500/40 shadow-[0_0_10px_rgba(16,185,129,0.2)]'
+                    : 'bg-amber-950/80 text-amber-300 border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.2)]'
                 }`}
               >
                 {selectedEndpoint.method}
               </span>
-              <span className="font-mono text-sm text-white font-medium">{selectedEndpoint.path}</span>
+              <span className="font-mono text-sm text-cyan-200 font-medium">{selectedEndpoint.path}</span>
             </div>
 
             <button
               onClick={handleExecute}
-              className="flex items-center gap-2 px-4 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/20 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-4 py-1.5 text-xs font-bold rounded-lg bg-gradient-to-r from-cyan-600 via-indigo-600 to-cyan-600 hover:from-cyan-500 hover:to-indigo-500 text-white shadow-[0_0_20px_rgba(6,182,212,0.35)] transition-all cursor-pointer uppercase tracking-wider font-mono"
             >
               <Play className="w-3.5 h-3.5 fill-white" />
-              Send Request
+              Execute Command
             </button>
           </div>
 
           <div className="p-4 space-y-4">
-            <p className="text-xs text-slate-400">{selectedEndpoint.description}</p>
+            <p className="text-xs text-slate-300 leading-relaxed">{selectedEndpoint.description}</p>
 
             {/* Query / Path Parameters */}
             {selectedEndpoint.defaultParams && Object.keys(selectedEndpoint.defaultParams).length > 0 && (
               <div>
-                <h4 className="text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2 font-mono">
+                <h4 className="text-xs font-semibold text-cyan-400 uppercase tracking-wider mb-2 font-mono flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
                   Parameters
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -723,7 +732,7 @@ export const ApiConsole: React.FC<ApiConsoleProps> = ({ employees, setEmployees,
                         type="text"
                         value={queryParams[paramKey] ?? ''}
                         onChange={e => setQueryParams({ ...queryParams, [paramKey]: e.target.value })}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 font-mono focus:border-indigo-500 focus:outline-none"
+                        className="w-full bg-slate-950/90 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-cyan-200 font-mono focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 focus:outline-none"
                       />
                     </div>
                   ))}
@@ -735,16 +744,17 @@ export const ApiConsole: React.FC<ApiConsoleProps> = ({ employees, setEmployees,
             {selectedEndpoint.method !== 'GET' && (
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <h4 className="text-xs font-semibold text-slate-300 uppercase tracking-wider font-mono">
-                    JSON Body
+                  <h4 className="text-xs font-semibold text-cyan-400 uppercase tracking-wider font-mono flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                    Payload Body
                   </h4>
-                  <span className="text-[11px] text-slate-500">application/json</span>
+                  <span className="text-[10px] font-mono text-slate-400">application/json</span>
                 </div>
                 <textarea
                   value={bodyText}
                   onChange={e => setBodyText(e.target.value)}
                   rows={selectedEndpoint.id === 'create_employee' ? 8 : 5}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-xs font-mono text-indigo-300 focus:border-indigo-500 focus:outline-none leading-relaxed"
+                  className="w-full bg-slate-950/90 border border-slate-800 rounded-lg p-3 text-xs font-mono text-cyan-300 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 focus:outline-none leading-relaxed"
                 />
               </div>
             )}
@@ -752,18 +762,21 @@ export const ApiConsole: React.FC<ApiConsoleProps> = ({ employees, setEmployees,
         </div>
 
         {/* Response Panel */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-sm">
-          <div className="p-4 border-b border-slate-800 bg-slate-950/50 flex items-center justify-between">
+        <div className="glass-panel hud-corner rounded-xl overflow-hidden shadow-xl">
+          <div className="p-4 border-b border-cyan-500/10 bg-slate-950/70 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <span className="text-xs font-semibold text-slate-300 uppercase tracking-wider font-mono">Response</span>
+              <span className="text-xs font-semibold text-cyan-300 uppercase tracking-wider font-mono flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                Response Terminal
+              </span>
               {responseStatus !== null && (
-                <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded border ${getStatusColor(responseStatus)}`}>
-                  {responseStatus} {responseStatus === 200 ? 'OK' : responseStatus === 201 ? 'CREATED' : responseStatus === 409 ? 'CONFLICT' : responseStatus === 422 ? 'UNPROCESSABLE ENTITY' : 'ERROR'}
+                <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded border ${getStatusColor(responseStatus)} shadow-sm`}>
+                  {responseStatus} {responseStatus === 200 ? 'OK' : responseStatus === 201 ? 'CREATED' : responseStatus === 409 ? 'CONFLICT' : responseStatus === 422 ? 'UNPROCESSABLE' : 'ERROR'}
                 </span>
               )}
               {executionTimeMs !== null && (
-                <span className="text-xs font-mono text-slate-400 flex items-center gap-1">
-                  <Clock className="w-3 h-3 text-slate-500" />
+                <span className="text-xs font-mono text-cyan-400/80 flex items-center gap-1">
+                  <Clock className="w-3 h-3 text-cyan-500" />
                   {executionTimeMs}ms
                 </span>
               )}
@@ -772,7 +785,7 @@ export const ApiConsole: React.FC<ApiConsoleProps> = ({ employees, setEmployees,
             {responseBody && (
               <button
                 onClick={handleCopyResponse}
-                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors"
+                className="flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-200 transition-colors font-mono"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copied ? 'Copied' : 'Copy JSON'}</span>
@@ -782,12 +795,12 @@ export const ApiConsole: React.FC<ApiConsoleProps> = ({ employees, setEmployees,
 
           <div className="p-4">
             {responseBody ? (
-              <pre className="bg-slate-950 p-4 rounded-lg overflow-x-auto text-xs font-mono text-emerald-300/90 max-h-[400px] leading-relaxed">
+              <pre className="bg-slate-950/90 border border-cyan-500/20 p-4 rounded-lg overflow-x-auto text-xs font-mono text-emerald-300 max-h-[420px] leading-relaxed shadow-inner">
                 {responseBody}
               </pre>
             ) : (
-              <div className="py-12 text-center text-slate-500 text-xs">
-                Click <span className="font-semibold text-indigo-400">Send Request</span> above to dispatch the operation and inspect the response.
+              <div className="py-12 text-center text-slate-500 text-xs font-mono">
+                Click <span className="font-semibold text-cyan-400">Execute Command</span> to trigger request and stream response payload.
               </div>
             )}
           </div>

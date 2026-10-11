@@ -115,22 +115,24 @@ export const PipelineStudio: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Intro Header */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="glass-panel hud-corner rounded-xl p-5 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <Layers className="w-5 h-5 text-indigo-400" />
-            <h2 className="text-base font-bold text-white tracking-tight">MongoDB Aggregation Pipeline Studio</h2>
+            <Layers className="w-5 h-5 text-cyan-400" />
+            <h2 className="text-base font-bold text-white tracking-tight tech-gradient-text">MongoDB Aggregation Pipeline Studio</h2>
           </div>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-slate-300">
             Inspection of multi-stage pipelines and execution plan guarantees (IXSCAN verification on 100k+ documents).
           </p>
         </div>
 
-        <div className="flex items-center gap-2 bg-slate-950 p-1 rounded-lg border border-slate-800 text-xs font-mono">
+        <div className="flex items-center gap-1.5 bg-slate-950/90 p-1.5 rounded-lg border border-slate-800 text-xs font-mono shadow-inner">
           <button
             onClick={() => setSelectedPipeline('dept_summary')}
             className={`px-3 py-1.5 rounded-md transition-all ${
-              selectedPipeline === 'dept_summary' ? 'bg-indigo-600 text-white font-bold' : 'text-slate-400 hover:text-slate-200'
+              selectedPipeline === 'dept_summary'
+                ? 'bg-cyan-950/90 text-cyan-300 border border-cyan-500/50 shadow-[0_0_12px_rgba(6,182,212,0.25)] font-bold'
+                : 'text-slate-400 hover:text-slate-200'
             }`}
           >
             Dept Summary
@@ -138,7 +140,9 @@ export const PipelineStudio: React.FC = () => {
           <button
             onClick={() => setSelectedPipeline('leaderboard')}
             className={`px-3 py-1.5 rounded-md transition-all ${
-              selectedPipeline === 'leaderboard' ? 'bg-indigo-600 text-white font-bold' : 'text-slate-400 hover:text-slate-200'
+              selectedPipeline === 'leaderboard'
+                ? 'bg-cyan-950/90 text-cyan-300 border border-cyan-500/50 shadow-[0_0_12px_rgba(6,182,212,0.25)] font-bold'
+                : 'text-slate-400 hover:text-slate-200'
             }`}
           >
             Leaderboard ($rank)
@@ -146,7 +150,9 @@ export const PipelineStudio: React.FC = () => {
           <button
             onClick={() => setSelectedPipeline('trend')}
             className={`px-3 py-1.5 rounded-md transition-all ${
-              selectedPipeline === 'trend' ? 'bg-indigo-600 text-white font-bold' : 'text-slate-400 hover:text-slate-200'
+              selectedPipeline === 'trend'
+                ? 'bg-cyan-950/90 text-cyan-300 border border-cyan-500/50 shadow-[0_0_12px_rgba(6,182,212,0.25)] font-bold'
+                : 'text-slate-400 hover:text-slate-200'
             }`}
           >
             Trend ($densify)
@@ -154,7 +160,9 @@ export const PipelineStudio: React.FC = () => {
           <button
             onClick={() => setSelectedPipeline('employee')}
             className={`px-3 py-1.5 rounded-md transition-all ${
-              selectedPipeline === 'employee' ? 'bg-indigo-600 text-white font-bold' : 'text-slate-400 hover:text-slate-200'
+              selectedPipeline === 'employee'
+                ? 'bg-cyan-950/90 text-cyan-300 border border-cyan-500/50 shadow-[0_0_12px_rgba(6,182,212,0.25)] font-bold'
+                : 'text-slate-400 hover:text-slate-200'
             }`}
           >
             Employee Monthly
